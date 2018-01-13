@@ -1,0 +1,13 @@
+Source: emacs-wrapper
+Section: misc
+Priority: extra
+Maintainer: Denver Ogaro <denver@ogaro.net>
+Pre-Depends: emacs-nox
+Depends: lsb-base (>= 3.2-14)
+Conflicts: emacs
+Standards-Version: 3.9.2
+Homepage: https://github.com/demonchild2112/emacs-wrapper
+Package: emacs-wrapper
+Architecture: any
+Description: Configures emacs with convenient default settings.
+ emacs-wrapper

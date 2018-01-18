@@ -1,6 +1,6 @@
 Format: http://dep.debian.net/deps/dep5
-Upstream-Name: emacs-wrapper
-Source: https://github.com/google/grr
+Upstream-Name: emacs-extras
+Source: https://github.com/demonchild2112/emacs-extras
 
 Files: *
 Copyright: 2018 Denver Ogaro

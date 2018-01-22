@@ -25,8 +25,11 @@
 ; Themes - At least emacs 24 required for this to work.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'custom-theme-load-path "/home/ogaro/code/emacs-color-theme-solarized")
+(let ((default-directory  "/usr/local/share/emacs-extras"))
+   (normal-top-level-add-subdirs-to-load-path))
 
-(add-to-list 'custom-theme-load-path "/home/ogaro/code/dracula")
+(add-to-list 'custom-theme-load-path "/usr/local/share/emacs-extras/emacs-color-theme-solarized")
+
+(add-to-list 'custom-theme-load-path "/usr/local/share/emacs-extras/dracula")
 
 (load-theme 'dracula t)

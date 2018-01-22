@@ -1,1 +1,3 @@
 src/default.el usr/local/share/emacs/site-lisp
+src/emacs-color-theme-solarized usr/local/share/emacs-extras
+src/dracula usr/local/share/emacs-extras

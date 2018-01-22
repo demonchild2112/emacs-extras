@@ -20,3 +20,13 @@
 
 ; Disable electric indent.
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Themes - At least emacs 24 required for this to work.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'custom-theme-load-path "/home/ogaro/code/emacs-color-theme-solarized")
+
+(add-to-list 'custom-theme-load-path "/home/ogaro/code/dracula")
+
+(load-theme 'dracula t)

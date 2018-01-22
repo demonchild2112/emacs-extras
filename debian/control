@@ -8,5 +8,5 @@ Homepage: https://github.com/demonchild2112/emacs-extras
 
 Package: emacs-extras
 Architecture: any
-Pre-Depends: emacs-nox
+Pre-Depends: emacs-nox (>= 24.0.0)
 Description: Configures emacs with convenient default settings.

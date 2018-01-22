@@ -1,1 +1,16 @@
-#!/bin/sh
+#!/bin/bash
+
+# Conflict checks not needed if already installed.
+[[ "${1}" == 'upgrade' || "${1}" == 'abort-upgrade' ]] && exit 0
+
+readonly SITE_LISP_DIR='/usr/local/share/emacs/site-lisp'
+readonly DEFAULT_EL="${SITE_LISP_DIR}/default.el"
+
+if [[ -e "${DEFAULT_EL}" ]]; then
+  echo "Conflict: ${DEFAULT_EL} already exists. Aborting install."
+  exit 1
+fi
+
+if [[ ! -d "${SITE_LISP_DIR}" ]]; then
+  mkdir -p "${SITE_LISP_DIR}"
+fi

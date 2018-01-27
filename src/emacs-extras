@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+
+INSTALLED_DEFAULT_EL='/usr/local/share/emacs/site-lisp/default.el'
+
+if [[ "${1}" == 'install' ]]; then
+  if [[ -e "${INSTALLED_DEFAULT_EL}" ]]; then
+    echo "File already exists: ${INSTALLED_DEFAULT_EL}"
+    exit 1
+  fi
+  ln -s /etc/emacs-extras/default.el "${INSTALLED_DEFAULT_EL}"
+elif [[ "${1}" == 'uninstall' ]]; then
+  if [[ -L "${INSTALLED_DEFAULT_EL}" ]]; then
+    rm "${INSTALLED_DEFAULT_EL}"
+  fi
+else
+  echo "Usage: emacs-extras [install|uninstall]"
+  exit 2
+fi

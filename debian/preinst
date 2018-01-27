@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # Conflict checks not needed if already installed.
 [[ "${1}" == 'upgrade' || "${1}" == 'abort-upgrade' ]] && exit 0
 

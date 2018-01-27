@@ -1,5 +1,5 @@
-emacs-extras (1.0) stable; urgency=low
+emacs-extras (1.0) UNRELEASED; urgency=low
 
-  * emacs-extras 1.0 release
+  * Initial release.
 
- -- Denver Ogaro <denver@ogaro.net>  Mon, 22 Jan 2018 20:46:01 +0100
+ -- Denver Ogaro <denver@ogaro.net>  Sat, 27 Jan 2018 12:09:29 +0100

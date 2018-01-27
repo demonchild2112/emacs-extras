@@ -3,7 +3,7 @@ Section: devel
 Priority: extra
 Maintainer: Denver Ogaro <denver@ogaro.net>
 Build-Depends: debhelper (>= 10.0.0)
-Standards-Version: 4.0.0
+Standards-Version: 4.1.1
 Homepage: https://github.com/demonchild2112/emacs-extras
 
 Package: emacs-extras

@@ -20,7 +20,7 @@ function showactivetheme() {
     echo "${active_theme}"
     return
   else
-    (>&2 echo "Error: Misconfiguration detected! Please re-install emacs-extras.")
+    >&2 echo "Error: Misconfiguration detected! Please re-install emacs-extras."
     exit 1
   fi
 }
@@ -33,20 +33,20 @@ function showthemes() {
 
 function enabletheme() {
   if [[ -z "${2}" ]]; then
-    (>&2 echo "Error: No theme specified. Use 'showthemes' to get a list of installed themes.")
+    >&2 echo "Error: No theme specified. Use 'showthemes' to get a list of installed themes."
     exit 1
   fi
 
   for theme in "${THEMES[@]}"; do
     if [[ "${2}" == "${theme}" ]]; then
-      rm "${ACTIVE_THEME_DIR}"/*
+      rm -f "${ACTIVE_THEME_DIR}"/*
       echo -e "(load-theme '${theme} t)" > ${ACTIVE_THEME_DIR}/${theme}.el
       echo "${theme} enabled. Restart emacs for changes to take effect."
       return
     fi
   done
 
-  (>&2 echo "Error: Theme ${2} not recognized. Use 'showthemes' to get a list of installed themes.")
+  >&2 echo "Error: Theme ${2} not recognized. Use 'showthemes' to get a list of installed themes."
   exit 1
 }
 

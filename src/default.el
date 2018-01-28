@@ -22,14 +22,11 @@
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Themes - At least emacs 24 required for this to work.
+; Themes - At least emacs 24 required.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(let ((default-directory  "/usr/local/share/emacs-extras"))
-   (normal-top-level-add-subdirs-to-load-path))
+(add-to-list 'custom-theme-load-path "/etc/emacs-extras/emacs-color-theme-solarized")
 
-(add-to-list 'custom-theme-load-path "/usr/local/share/emacs-extras/emacs-color-theme-solarized")
-
-(add-to-list 'custom-theme-load-path "/usr/local/share/emacs-extras/dracula")
+(add-to-list 'custom-theme-load-path "/etc/emacs-extras/dracula")
 
 (load-theme 'dracula t)

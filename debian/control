@@ -10,7 +10,6 @@ Package: emacs-extras
 Architecture: any
 Pre-Depends: emacs-nox (>= 24.0.0)
 Depends: ${misc:Depends}
-Description: Configures emacs with color themes and convenient settings.
-	emacs-extras contains configuration files which add convenient
-	settings for emacs, as well as themes for customizing the look and
-	feel of emacs.
+Description: Add-ons for emacs.
+	emacs-extras contains color themes and other convenient settings
+	for emacs.

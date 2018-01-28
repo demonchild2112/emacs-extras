@@ -4,3 +4,6 @@
 [submodule "src/dracula"]
 	path = src/dracula
 	url = https://github.com/dracula/emacs.git
+[submodule "src/solarized"]
+	path = src/solarized
+	url = https://github.com/sellout/emacs-color-theme-solarized.git

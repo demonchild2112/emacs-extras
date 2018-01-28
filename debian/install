@@ -1,4 +1,4 @@
 src/default.el etc/emacs-extras
-src/emacs-color-theme-solarized etc/emacs-extras
+src/solarized etc/emacs-extras
 src/dracula etc/emacs-extras
 src/emacs-extras usr/bin

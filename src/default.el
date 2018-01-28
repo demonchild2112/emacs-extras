@@ -25,8 +25,8 @@
 ; Themes - At least emacs 24 required.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'custom-theme-load-path "/etc/emacs-extras/emacs-color-theme-solarized")
+(add-to-list 'custom-theme-load-path "/etc/emacs-extras/solarized")
 
 (add-to-list 'custom-theme-load-path "/etc/emacs-extras/dracula")
 
-(load-theme 'dracula t)
+(add-to-list 'load-path "/etc/emacs-extras/active-theme")

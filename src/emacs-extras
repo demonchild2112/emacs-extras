@@ -6,23 +6,11 @@ readonly COMMANDS=(showthemes enabletheme disabletheme install uninstall help)
 readonly USAGE="Usage: $(IFS=\|;echo "${COMMANDS[*]}")"
 readonly THEMES=(dracula solarized)
 readonly INSTALLED_DEFAULT_EL='/usr/local/share/emacs/site-lisp/default.el'
-readonly ACTIVE_THEME_DIR='/etc/emacs-extras/active-theme'
+readonly ACTIVE_THEME_FILE='/etc/emacs-extras/active-theme.el'
 
 function showactivetheme() {
-  active_theme_file="$(ls ${ACTIVE_THEME_DIR})"
-  if [[ -z "${active_theme_file}" ]]; then
-    echo ""
-    return
-  fi
-
-  if [[ -f "${ACTIVE_THEME_DIR}/${active_theme_file}" ]]; then
-    active_theme=${active_theme_file%.el}
-    echo "${active_theme}"
-    return
-  else
-    >&2 echo "Error: Misconfiguration detected! Please re-install emacs-extras."
-    exit 1
-  fi
+  active_theme="$(cat "${ACTIVE_THEME_FILE}" | sed "s/(load-theme '//" | sed "s/ t)//")"
+  echo "${active_theme}"
 }
 
 function showthemes() {
@@ -44,8 +32,7 @@ function enabletheme() {
 
   for theme in "${THEMES[@]}"; do
     if [[ "${2}" == "${theme}" ]]; then
-      rm -f "${ACTIVE_THEME_DIR}"/*
-      echo -e "(load-theme '${theme} t)" > ${ACTIVE_THEME_DIR}/${theme}.el
+      echo -e "(load-theme '${theme} t)" > ${ACTIVE_THEME_FILE}
       echo "${theme} enabled. Restart emacs for changes to take effect."
       return
     fi
@@ -62,7 +49,7 @@ function disabletheme() {
     exit 1
   fi
 
-  rm "${ACTIVE_THEME_DIR}/${active_theme}.el"
+  echo "" > ${ACTIVE_THEME_FILE}
   echo "${active_theme} deactivated. Restart emacs for changes to take effect."
 }
 
@@ -73,7 +60,7 @@ function install() {
   fi
 
   ln -s /etc/emacs-extras/default.el "${INSTALLED_DEFAULT_EL}"
-  mkdir -p "${ACTIVE_THEME_DIR}"
+  touch "${ACTIVE_THEME_FILE}"
 }
 
 function uninstall() {
@@ -81,11 +68,7 @@ function uninstall() {
     rm "${INSTALLED_DEFAULT_EL}"
   fi
 
-  rm -rf "${ACTIVE_THEME_DIR}"
-}
-
-function help() {
-  echo "${USAGE}"
+  rm "${ACTIVE_THEME_FILE}"
 }
 
 for command in "${COMMANDS[@]}"; do

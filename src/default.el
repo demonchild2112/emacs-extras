@@ -29,4 +29,4 @@
 
 (add-to-list 'custom-theme-load-path "/etc/emacs-extras/dracula")
 
-(add-to-list 'load-path "/etc/emacs-extras/active-theme")
+(load-file "/etc/emacs-extras/active-theme.el")

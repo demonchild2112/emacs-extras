@@ -26,8 +26,13 @@ function showactivetheme() {
 }
 
 function showthemes() {
+  active_theme="$(showactivetheme)"
+  if [[ ! -z "${active_theme}" ]]; then
+    echo "${active_theme} (active)"
+  fi
+
   for theme in "${THEMES[@]}"; do
-    echo "${theme}"
+    [[ "${theme}" != "${active_theme}" ]] && echo "${theme}"
   done
 }
 
@@ -53,7 +58,7 @@ function enabletheme() {
 function disabletheme() {
   active_theme="$(showactivetheme)"
   if [[ -z "${active_theme}" ]]; then
-    (>&2 echo 'Error: No theme is currently active.')
+    >&2 echo 'Error: No theme is currently active.'
     exit 1
   fi
 

@@ -11,5 +11,4 @@ Architecture: any
 Pre-Depends: emacs-nox (>= 24.0.0)
 Depends: ${misc:Depends}
 Description: Add-ons for emacs.
-	emacs-extras contains color themes and other convenient settings
-	for emacs.
+	emacs-extras adds color themes and other convenient settings for emacs.

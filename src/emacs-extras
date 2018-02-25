@@ -2,7 +2,7 @@
 
 set -e
 
-readonly COMMANDS=(showthemes enabletheme disabletheme install uninstall help)
+readonly COMMANDS=(showthemes enabletheme disabletheme install uninstall)
 readonly USAGE="Usage: $(IFS=\|;echo "${COMMANDS[*]}")"
 readonly THEMES=(dracula solarized)
 readonly INSTALLED_DEFAULT_EL='/usr/local/share/emacs/site-lisp/default.el'

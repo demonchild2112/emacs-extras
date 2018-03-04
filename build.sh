@@ -11,7 +11,7 @@
 set -e
 
 readonly VERSION='1.0-0ubuntu2'
-
+readonly DESCRIPTION='First release.'
 readonly SCRAPE_PATTERN='<p>The following releases of Ubuntu are available:</p>  <ul>.*?</ul>'
 readonly SCRAPE_RESULT="$(curl -s releases.ubuntu.com 2>/dev/null | tr '\n' ' ' | grep -oP "${SCRAPE_PATTERN}")"
 
@@ -71,7 +71,7 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
     --urgency low \
     --controlmaint \
     --distribution "${release}" \
-    "First release."
+    "${DESCRIPTION}"
   echo "Building for ${release}"
   debuild -S
   cd ../

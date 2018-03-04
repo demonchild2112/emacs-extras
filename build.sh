@@ -52,6 +52,7 @@ for release in "${CURRENT_UBUNTU_RELEASES[@]}"; do
     RELEASES_TO_UPLOAD+=("${release}")
   else
     echo "Error: Unexpected response code (${deb_response_code}) for ${deb_url}"
+    exit 1
   fi
 done
 

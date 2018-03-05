@@ -12,9 +12,9 @@ set -e
 
 readonly VERSION='1.0-0ubuntu2'
 readonly DESCRIPTION='First release.'
+
 readonly SCRAPE_PATTERN='<p>The following releases of Ubuntu are available:</p>  <ul>.*?</ul>'
 readonly SCRAPE_RESULT="$(curl -s releases.ubuntu.com 2>/dev/null | tr '\n' ' ' | grep -oP "${SCRAPE_PATTERN}")"
-
 if [[ -z "${SCRAPE_RESULT}" ]]; then
   echo "Error: Scraping releases.ubuntu.com failed."
   exit 1
@@ -27,7 +27,6 @@ if [[ ${#CURRENT_UBUNTU_RELEASES[@]} -eq 0 ]]; then
 fi
 
 readonly DEB_URL_PREFIX='https://launchpad.net/~demonchild2112/+archive/ubuntu/emacs/+files'
-
 # Sanity-check the deb-url pattern we use for checking whether a package
 # was uploaded.
 readonly CONTROL_DEB_URL="${DEB_URL_PREFIX}/emacs-extras_1.0-0ubuntu2~xenial_amd64.deb"

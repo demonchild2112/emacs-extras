@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 # This script builds source packages for emacs-extras and uploads
-# them to ppa:demonchild2112/emacs. It figures out which Ubuntu
+# them to ppa:demonchild2112/test (by default). It figures out which Ubuntu
 # releases do not have corresponding packages available in the
 # ppa and only builds packages for those.
 #
@@ -12,6 +12,7 @@ set -e
 
 readonly VERSION='1.0-0ubuntu2'
 readonly DESCRIPTION='First release.'
+readonly UPLOAD_PPA=${UPLOAD_PPA:-demonchild2112/test}
 
 readonly SCRAPE_PATTERN='<p>The following releases of Ubuntu are available:</p>  <ul>.*?</ul>'
 readonly SCRAPE_RESULT="$(curl -s releases.ubuntu.com 2>/dev/null | tr '\n' ' ' | grep -oP "${SCRAPE_PATTERN}")"
@@ -88,5 +89,5 @@ fi
 for release in "${RELEASES_TO_UPLOAD[@]}"; do
   cd "/tmp/emacs-extras-builds/${release}"
   echo "Uploading ${release}..."
-  dput ppa:demonchild2112/emacs "emacs-extras_${VERSION}~${release}_source.changes"
+  dput "ppa:${UPLOAD_PPA}" "emacs-extras_${VERSION}~${release}_source.changes"
 done

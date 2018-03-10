@@ -1,0 +1,12 @@
+os: linux
+addons:
+  apt:
+    packages:
+      - fakeroot
+      - debhelper
+      - libffi-dev
+      - libssl-dev
+env:
+  - UPLOAD_PPA=demonchild2112/test
+script:
+  - build.sh

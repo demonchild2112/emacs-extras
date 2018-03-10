@@ -1,6 +1,8 @@
 emacs-extras
 ==========
 
+[![Build Status](https://travis-ci.org/google/grr.svg?branch=master)](https://travis-ci.org/demonchild2112/emacs-extras)
+
 *emacs-extras* is a package (currently just for Ubuntu) that adds color themes
 and other convenient settings to a default emacs installation.
 

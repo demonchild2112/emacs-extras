@@ -23,14 +23,14 @@ Other settings addded by *emacs-extras* include:
 2. Add the hosting ppa:
 
         sudo add-apt-repository ppa:demonchild2112/emacs
- 
+
  3. Update apt sources:
  
         sudo apt-get update
- 
+
  4. Install:
  
         sudo apt-get install emacs-extras
-  
-  5. Check that installation worked by running `emacs-extras` on a terminal
-      without arguments - a usage message should be printed.
+
+ 5. Check that installation worked by running `emacs-extras` on a terminal
+    without arguments - a usage message should be printed.

@@ -4,6 +4,7 @@ addons:
     packages:
       - fakeroot
       - debhelper
+      - devscripts
       - libffi-dev
       - libssl-dev
 env:

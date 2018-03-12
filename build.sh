@@ -8,7 +8,7 @@
 # Without any arguments, the script just builds the packages. Run
 # it with '--upload' to upload them after building.
 
-set -e
+set -ex
 
 readonly VERSION='1.0-0ubuntu3'
 readonly DESCRIPTION='First release.'
@@ -73,8 +73,9 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
     --distribution "${release}" \
     "${DESCRIPTION}"
   echo "Building for ${release}"
-  debuild -S
+  debuild -S -us -uc
   cd ../
+  debsign -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent' -S *.changes
   mkdir "/tmp/emacs-extras-builds/${release}"
   mv emacs-extras_* "/tmp/emacs-extras-builds/${release}"
   cd -

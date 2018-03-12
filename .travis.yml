@@ -17,4 +17,4 @@ install:
   - cat travis_gpg_pass.txt | gpg --passphrase-fd 0 --import launchpad_gpg_key.asc
   - gpg --list-keys
 script:
-  - ./build.sh
+  - ./build.sh --upload

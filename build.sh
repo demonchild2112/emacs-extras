@@ -75,7 +75,7 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
   echo "Building for ${release}"
   debuild -S -us -uc
   cd ../
-  debsign -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent' -S *.changes
+  debsign -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent' -S emacs-extras_*.changes
   mkdir "/tmp/emacs-extras-builds/${release}"
   mv emacs-extras_* "/tmp/emacs-extras-builds/${release}"
   cd -

@@ -5,6 +5,7 @@ addons:
       - fakeroot
       - debhelper
       - devscripts
+      - dput
       - libffi-dev
       - libssl-dev
       - libdistro-info-perl

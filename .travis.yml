@@ -9,4 +9,4 @@ addons:
 env:
   - UPLOAD_PPA=demonchild2112/test
 script:
-  - build.sh
+  - ./build.sh

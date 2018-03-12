@@ -18,7 +18,7 @@ Other settings addded by *emacs-extras* include:
 ### Installation
 1. Check that you can have 'add-apt-repository' installed:
 
-        [[ -z "$(which add-apt-repository)" ]] && sudo apt-get install software-properties-common
+        [[ -z "$(type add-apt-repository 2>/dev/null)" ]] && sudo apt-get install software-properties-common
 
 2. Add the hosting ppa:
 

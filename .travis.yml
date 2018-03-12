@@ -8,6 +8,7 @@ addons:
       - libffi-dev
       - libssl-dev
       - libdistro-info-perl
+      - libparse-debcontrol-perl
 env:
   - UPLOAD_PPA=demonchild2112/emacs
 before_install:

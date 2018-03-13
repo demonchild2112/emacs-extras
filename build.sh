@@ -10,7 +10,7 @@
 
 set -ex
 
-readonly VERSION='1.0-0ubuntu3'
+readonly VERSION='1.0-0ubuntu4'
 readonly DESCRIPTION='First release.'
 readonly UPLOAD_PPA=${UPLOAD_PPA:-demonchild2112/emacs}
 
@@ -73,9 +73,10 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
     --distribution "${release}" \
     "${DESCRIPTION}"
   echo "Building for ${release}"
-  debuild -S -us -uc
+  #debuild -S -us -uc
+  debuild -S -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent'
   cd ../
-  debsign -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent' -S emacs-extras_*.changes
+  #debsign -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent' -S emacs-extras_*.changes
   mkdir "/tmp/emacs-extras-builds/${release}"
   mv emacs-extras_* "/tmp/emacs-extras-builds/${release}"
   cd -

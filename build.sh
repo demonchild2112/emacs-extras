@@ -74,7 +74,7 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
     "${DESCRIPTION}"
   echo "Building for ${release}"
   if [[ -f travis_gpg_pass.txt ]]; then
-    debuild -S -p'gpg --passphrase-file travis_gpg_pass.txt --batch --no-use-agent'
+    debuild -S -p'gpg --passphrase-file emacs-extras/travis_gpg_pass.txt --batch --no-use-agent'
   else
     if [[ "${1}" == '--upload' ]]; then
       debuild -S

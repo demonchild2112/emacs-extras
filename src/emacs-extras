@@ -4,9 +4,15 @@ set -e
 
 readonly COMMANDS=(showthemes enabletheme disabletheme install uninstall)
 readonly USAGE="Usage: $(IFS=\|;echo "${COMMANDS[*]}")"
-readonly THEMES=(dracula solarized)
-readonly INSTALLED_DEFAULT_EL='/usr/local/share/emacs/site-lisp/default.el'
+readonly DEFAULT_EL_SYMLINK='/usr/local/share/emacs/site-lisp/default.el'
 readonly ACTIVE_THEME_FILE='/etc/emacs-extras/active-theme.el'
+readonly THEMES_MANIFEST_FILE='/etc/emacs-extras/themes.el'
+readonly THEMES=($(ls /etc/emacs-extras/themes))
+
+function fatal() {
+  >&2 echo "Error: ${1}"
+  exit 1
+}
 
 function showactivetheme() {
   active_theme="$(cat "${ACTIVE_THEME_FILE}" | sed "s/(load-theme '//" | sed "s/ t)//")"
@@ -26,8 +32,7 @@ function showthemes() {
 
 function enabletheme() {
   if [[ -z "${2}" ]]; then
-    >&2 echo "Error: No theme specified. Use 'showthemes' to get a list of installed themes."
-    exit 1
+    fatal "No theme specified. Use 'showthemes' to get a list of installed themes."
   fi
 
   for theme in "${THEMES[@]}"; do
@@ -38,15 +43,13 @@ function enabletheme() {
     fi
   done
 
-  >&2 echo "Error: Theme ${2} not recognized. Use 'showthemes' to get a list of installed themes."
-  exit 1
+  fatal "Theme ${2} not recognized. Use 'showthemes' to get a list of installed themes."
 }
 
 function disabletheme() {
   active_theme="$(showactivetheme)"
   if [[ -z "${active_theme}" ]]; then
-    >&2 echo 'Error: No theme is currently active.'
-    exit 1
+    fatal 'Error: No theme is currently active.'
   fi
 
   echo "" > ${ACTIVE_THEME_FILE}
@@ -54,21 +57,32 @@ function disabletheme() {
 }
 
 function install() {
-  if [[ -e "${INSTALLED_DEFAULT_EL}" ]]; then
-    echo "File already exists: ${INSTALLED_DEFAULT_EL}"
-   exit 1
+  if [[ -e "${DEFAULT_EL_SYMLINK}" ]]; then
+    fatal "File already exists: ${DEFAULT_EL_SYMLINK}"
   fi
 
-  ln -s /etc/emacs-extras/default.el "${INSTALLED_DEFAULT_EL}"
+  for theme in "${THEMES[@]}"; do
+    if [[ ! -d "/etc/emacs-extras/themes/${theme}" ]]; then
+      fatal "File /etc/emacs-extras/themes/${theme} is not a directory. Delete it and try again."
+    fi
+  done
+
+  ln -s /etc/emacs-extras/default.el "${DEFAULT_EL_SYMLINK}"
   touch "${ACTIVE_THEME_FILE}"
+
+  [[ -e "${THEMES_MANIFEST_FILE}" ]] && rm "${THEMES_MANIFEST_FILE}"
+  for theme in "${THEMES[@]}"; do
+    echo "(add-to-list 'custom-theme-load-path \"/etc/emacs-extras/themes/${theme}\")" >> "${THEMES_MANIFEST_FILE}"
+  done
 }
 
 function uninstall() {
-  if [[ -L "${INSTALLED_DEFAULT_EL}" ]]; then
-    rm "${INSTALLED_DEFAULT_EL}"
+  if [[ -L "${DEFAULT_EL_SYMLINK}" ]]; then
+    rm "${DEFAULT_EL_SYMLINK}"
   fi
 
   rm "${ACTIVE_THEME_FILE}"
+  rm "${THEMES_MANIFEST_FILE}"
 }
 
 for command in "${COMMANDS[@]}"; do

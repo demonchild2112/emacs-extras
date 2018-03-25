@@ -1,6 +1,9 @@
 [submodule "src/dracula"]
-	path = src/dracula
+	path = src/themes/dracula
 	url = https://github.com/dracula/emacs.git
 [submodule "src/solarized"]
-	path = src/solarized
+	path = src/themes/solarized
 	url = https://github.com/sellout/emacs-color-theme-solarized.git
+[submodule "src/green-phosphor"]
+	path = src/themes/green-phosphor
+	url = https://github.com/aalpern/emacs-color-theme-green-phosphor.git

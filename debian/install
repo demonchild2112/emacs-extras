@@ -1,4 +1,3 @@
-src/default.el etc/emacs-extras
-src/solarized etc/emacs-extras
-src/dracula etc/emacs-extras
 src/emacs-extras usr/bin
+src/default.el etc/emacs-extras
+src/themes etc/emacs-extras

@@ -10,8 +10,8 @@
 
 set -ex
 
-readonly VERSION='1.0-0ubuntu4'
-readonly DESCRIPTION='First release.'
+readonly VERSION='1.1-0ubuntu1'
+readonly DESCRIPTION='Add more color themes.'
 readonly UPLOAD_PPA=${UPLOAD_PPA:-demonchild2112/emacs}
 
 readonly SCRAPE_PATTERN='<p>The following releases of Ubuntu are available:</p>  <ul>.*?</ul>'
@@ -76,7 +76,11 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
   if [[ -f travis_gpg_pass.txt ]]; then
     debuild -S -p'gpg --passphrase-file travis_gpg_pass.txt --batch --no-use-agent'
   else
-    debuild -S
+    if [[ "${1}" == '--upload' ]]; then
+      debuild -S
+		else
+		  debuild
+		fi
   fi
   cd ../
   mkdir "/tmp/emacs-extras-builds/${release}"

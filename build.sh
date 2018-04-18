@@ -30,7 +30,7 @@ fi
 readonly DEB_URL_PREFIX='https://launchpad.net/~demonchild2112/+archive/ubuntu/emacs/+files'
 # Sanity-check the deb-url pattern we use for checking whether a package
 # was uploaded.
-readonly CONTROL_DEB_URL="${DEB_URL_PREFIX}/emacs-extras_1.0-0ubuntu2~xenial_amd64.deb"
+readonly CONTROL_DEB_URL="${DEB_URL_PREFIX}/emacs-extras_1.1-0ubuntu1~xenial_amd64.deb"
 if [[ "$(curl -s -w %{http_code} --head "${CONTROL_DEB_URL}" -o /dev/null)" != '303' ]]; then
   echo "Error: Unexpected response code for ${CONTROL_DEB_URL}"
   exit 1

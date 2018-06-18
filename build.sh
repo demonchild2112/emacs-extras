@@ -78,9 +78,9 @@ for release in "${RELEASES_TO_UPLOAD[@]}"; do
   else
     if [[ "${1}" == '--upload' ]]; then
       debuild -S
-		else
-		  debuild
-		fi
+    else
+      debuild
+    fi
   fi
   cd ../
   mkdir "/tmp/emacs-extras-builds/${release}"

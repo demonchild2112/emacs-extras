@@ -16,9 +16,9 @@ Other settings addded by *emacs-extras* include:
 * Disabling electric indent (I really wish that was off by default).
 
 ### Installation
-1. Check that you can have 'add-apt-repository' installed:
+1. Install `software-properties-common`, which allows you to add the hosting ppa to your local repository lists:
 
-        [[ -z "$(type add-apt-repository 2>/dev/null)" ]] && sudo apt-get install software-properties-common
+        sudo apt install software-properties-common
 
 2. Add the hosting ppa:
 
@@ -26,11 +26,11 @@ Other settings addded by *emacs-extras* include:
 
  3. Update apt sources:
  
-        sudo apt-get update
+        sudo apt update
 
  4. Install:
  
-        sudo apt-get install emacs-extras
+        sudo apt install emacs-extras
 
  5. Check that installation worked by running `emacs-extras` on a terminal
     without arguments - a usage message should be printed.

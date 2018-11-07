@@ -21,6 +21,9 @@
 ; Disable electric indent.
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
+; Display column numbers (off by default).
+(setq column-number-mode t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; Themes - At least emacs 24 required.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

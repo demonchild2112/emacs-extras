@@ -10,20 +10,24 @@
 
 set -ex
 
+function fatal() {
+  >&2 echo "Error: ${1}"
+  exit 1
+}
+
+python -c "import lxml"
+
+if [[ $? -ne 0 ]]; then
+  fatal "Error: Install lxml before continuing."
+fi
+
 readonly VERSION='1.1-0ubuntu1'
 readonly DESCRIPTION='Add more color themes.'
 readonly UPLOAD_PPA=${UPLOAD_PPA:-demonchild2112/emacs}
 
-readonly SCRAPE_PATTERN='<p>The following releases of Ubuntu are available:</p>  <ul>.*?</ul>'
-readonly SCRAPE_RESULT="$(curl -s releases.ubuntu.com 2>/dev/null | tr '\n' ' ' | grep -oP "${SCRAPE_PATTERN}")"
-if [[ -z "${SCRAPE_RESULT}" ]]; then
-  echo "Error: Scraping releases.ubuntu.com failed."
-  exit 1
-fi
-
-readonly CURRENT_UBUNTU_RELEASES=($(echo "${SCRAPE_RESULT}" | grep -oP 'href=".*?"' | sed 's/href=//; s/"//g; s/\///'))
+readonly CURRENT_UBUNTU_RELEASES=($(python fetch_ubuntu_releases.py))
 if [[ ${#CURRENT_UBUNTU_RELEASES[@]} -eq 0 ]]; then
-  echo "Error: Failed to parse Ubuntu releases from scrape result."
+  echo "Error: Failed to fetch the list of current Ubuntu releases."
   exit 1
 fi
 
@@ -32,8 +36,7 @@ readonly DEB_URL_PREFIX='https://launchpad.net/~demonchild2112/+archive/ubuntu/e
 # was uploaded.
 readonly CONTROL_DEB_URL="${DEB_URL_PREFIX}/emacs-extras_1.1-0ubuntu1~xenial_amd64.deb"
 if [[ "$(curl -s -w %{http_code} --head "${CONTROL_DEB_URL}" -o /dev/null)" != '303' ]]; then
-  echo "Error: Unexpected response code for ${CONTROL_DEB_URL}"
-  exit 1
+  fatal "Error: Unexpected response code for ${CONTROL_DEB_URL}"
 fi
 
 # Figure out which packages to build and upload.
@@ -51,8 +54,7 @@ for release in "${CURRENT_UBUNTU_RELEASES[@]}"; do
   elif [[ "${deb_response_code}" == '404' ]]; then
     RELEASES_TO_UPLOAD+=("${release}")
   else
-    echo "Error: Unexpected response code (${deb_response_code}) for ${deb_url}"
-    exit 1
+    fatal "Error: Unexpected response code (${deb_response_code}) for ${deb_url}"
   fi
 done
 

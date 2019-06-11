@@ -15,6 +15,7 @@ env:
 before_install:
   - openssl aes-256-cbc -K $encrypted_6899303fb979_key -iv $encrypted_6899303fb979_iv -in travis_gpg_pass.txt.enc -out travis_gpg_pass.txt -d
 install:
+  - pip install lxml
   - cat travis_gpg_pass.txt | gpg --passphrase-fd 0 --import launchpad_gpg_key.asc
   - gpg --list-keys
 script:
